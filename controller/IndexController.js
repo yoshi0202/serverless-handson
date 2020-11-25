@@ -11,8 +11,7 @@ module.exports = class IndexController {
     const qiitaService = new QiitaService();
     try {
       const apiRes = await request.get();
-      let dto = qiitaService.createQiitaDTOList(apiRes);
-      return dto;
+      return qiitaService.createQiitaDTOList(apiRes);
     } catch (error) {
       return error;
     }
