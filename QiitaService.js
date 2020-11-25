@@ -1,13 +1,20 @@
+const QiitaDTO = require("./QiitaDTO");
 module.exports = class QiitaService {
-  static getTitles(apiRes) {
-    return apiRes.map((data) => {
-      return data.title;
-    });
+  getTitle(data) {
+    return data.title;
   }
 
-  static getUrls(apiRes) {
-    return apiRes.map((data) => {
-      return data.url;
+  getUrl(data) {
+    return data.url;
+  }
+
+  createQiitaDTO(apiRes) {
+    return new QiitaDTO(this.getTitle(apiRes), this.getUrl(apiRes));
+  }
+
+  createQiitaDTOList(apiResArray) {
+    return apiResArray.map((apiRes) => {
+      return this.createQiitaDTO(apiRes);
     });
   }
 };

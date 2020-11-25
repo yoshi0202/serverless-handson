@@ -7,13 +7,11 @@ module.exports = async function () {
     443,
     "GET"
   );
+  const qService = new qiitaService();
   try {
     const apiRes = await request.get();
-    console.log(apiRes[0]);
-    let title = qiitaService.getTitles(apiRes);
-    let url = qiitaService.getUrls(apiRes);
-    console.log(title);
-    console.log(url);
+    let dto = qService.createQiitaDTOList(apiRes);
+    console.log(dto);
   } catch (error) {
     console.log(error);
   }
