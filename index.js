@@ -1,4 +1,14 @@
-const main = require("./main");
+const IndexController = require("./controller/IndexController");
 exports.handler = async (event) => {
-  await main();
+  switch (event.rawPath) {
+    case "/":
+      return await IndexController.main();
+
+    case "/hello":
+      console.log("hello!!!");
+      break;
+
+    default:
+      break;
+  }
 };
