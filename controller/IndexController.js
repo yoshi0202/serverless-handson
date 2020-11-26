@@ -1,17 +1,18 @@
-const RequestModule = require("../RequestModule");
 const QiitaService = require("../services/QiitaService");
+const LineService = require("../services/LineService");
 module.exports = class IndexController {
   static async main() {
-    const request = new RequestModule(
-      "qiita.com",
-      "/api/v2/items?page=1&per_page=10",
-      443,
-      "GET"
-    );
     const qiitaService = new QiitaService();
+    const lineService = new LineService();
     try {
-      const apiRes = await request.get();
-      return qiitaService.createQiitaDTOList(apiRes);
+      const res = await qiitaService.getNewPost();
+      return qiitaService.createQiitaDTOList(res);
+      // const qiitaDto = qiitaService.createQiitaDtoList(res);
+      // get token
+      // const token = await lineService.getAccessToken();
+      // lineService.setToken(token);
+      // await lineService.revokeAccessToken();
+      // return lineService.token;
     } catch (error) {
       return error;
     }
