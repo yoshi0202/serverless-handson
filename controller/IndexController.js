@@ -1,5 +1,5 @@
 const RequestModule = require("../RequestModule");
-const QiitaService = require("../QiitaService");
+const QiitaService = require("../services/QiitaService");
 module.exports = class IndexController {
   static async main() {
     const request = new RequestModule(
