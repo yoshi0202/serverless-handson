@@ -9,7 +9,7 @@ module.exports = class RequestModule {
     this.response = "";
   }
 
-  async send() {
+  async send(data = "") {
     return new Promise((resolve, reject) => {
       const options = {
         host: this.host,
@@ -39,7 +39,7 @@ module.exports = class RequestModule {
       });
 
       // send the request
-      req.write("");
+      req.write(data);
       req.end();
     });
   }
