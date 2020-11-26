@@ -1,20 +1,22 @@
 const http = require("https");
 module.exports = class RequestModule {
-  constructor(host, path, port, method) {
+  constructor(host, path, port, method, headers = {}) {
     this.host = host;
     this.path = path;
     this.port = port;
     this.method = method;
+    this.headers = headers;
     this.response = "";
   }
 
-  async get() {
+  async send() {
     return new Promise((resolve, reject) => {
       const options = {
         host: this.host,
         path: this.path,
         port: this.port,
         method: this.method,
+        headers: this.headers,
       };
 
       const req = http.request(options, (res) => {
