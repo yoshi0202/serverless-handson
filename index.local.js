@@ -5,6 +5,7 @@ const HelloController = require("./controller/HelloController");
   switch (process.argv[2]) {
     case "/":
       console.log(await IndexController.main());
+      break;
 
     case "/hello":
       console.log(HelloController.main());
