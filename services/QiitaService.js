@@ -1,5 +1,5 @@
 const QiitaDTO = require("../dto/QiitaDTO");
-const RequestModule = require("../modules/RequestModule");
+const HTTPRequest = require("../modules/HTTPRequest");
 module.exports = class QiitaService {
   getTitle(data) {
     return data.title;
@@ -19,13 +19,10 @@ module.exports = class QiitaService {
     });
   }
 
-  async getNewPost() {
-    const request = new RequestModule(
-      "qiita.com",
-      "/api/v2/items?page=1&per_page=10",
-      443,
-      "GET"
+  async getNewArticles() {
+    const httpRequest = new HTTPRequest();
+    return await httpRequest.get(
+      "https://qiita.com/api/v2/items?page=1&per_page=10"
     );
-    return await request.send();
   }
 };
