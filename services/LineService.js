@@ -1,4 +1,3 @@
-const RequestModule = require("../modules/RequestModule");
 const HTTPRequest = require("../modules/HTTPRequest");
 const LineMsgDTO = require("../dto/LineMsgDTO");
 module.exports = class LineService {

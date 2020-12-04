@@ -1,8 +1,6 @@
-const HTTPRequest = require("../modules/HTTPRequest");
 const LineService = require("../services/LineService");
 module.exports = class HelloController {
   static async main(requestBody) {
-    const request = new HTTPRequest();
     const lineService = new LineService();
     try {
       if (!process.env.LINE_TOKEN) {
