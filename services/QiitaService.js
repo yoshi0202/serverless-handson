@@ -28,7 +28,7 @@ module.exports = class QiitaService {
 
   createMsgArrayByQiitaDTO(dtoList) {
     return dtoList.map(function (dto) {
-      return `タイトル：${dto.title}\n URL: ${dto.url}`;
+      return `タイトル：${dto.title}\nURL: ${dto.url}`;
     });
   }
 };
