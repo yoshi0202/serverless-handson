@@ -7,12 +7,6 @@ module.exports = class IndexController {
     try {
       const res = await qiitaService.getNewPost();
       return qiitaService.createQiitaDTOList(res);
-      // const qiitaDto = qiitaService.createQiitaDtoList(res);
-      // get token
-      // const token = await lineService.getAccessToken();
-      // lineService.setToken(token);
-      // await lineService.revokeAccessToken();
-      // return lineService.token;
     } catch (error) {
       return error;
     }
