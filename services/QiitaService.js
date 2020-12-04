@@ -22,7 +22,13 @@ module.exports = class QiitaService {
   async getNewArticles() {
     const httpRequest = new HTTPRequest();
     return await httpRequest.get(
-      "https://qiita.com/api/v2/items?page=1&per_page=10"
+      "https://qiita.com/api/v2/items?page=1&per_page=5"
     );
+  }
+
+  createMsgArrayByQiitaDTO(dtoList) {
+    return dtoList.map(function (dto) {
+      return `タイトル：${dto.title}\nURL: ${dto.url}`;
+    });
   }
 };
