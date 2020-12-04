@@ -10,7 +10,7 @@ module.exports = class HelloController {
         return "";
       }
 
-      let body = JSON.parse(requestBody);
+      const body = JSON.parse(requestBody);
       lineService.setToken(process.env.LINE_TOKEN);
       const sendMessageList = lineService.createMessageDTOList([
         body.events[0].message.text,
