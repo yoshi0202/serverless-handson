@@ -1,28 +1,27 @@
 const HTTPRequest = require("../modules/HTTPRequest");
+const LineService = require("../services/LineService");
 module.exports = class HelloController {
   static async main(requestBody) {
-    if (!process.env.LINE_TOKEN) {
-      console.error(
-        `LINE_TOKENが設定されていません LINE_TOKEN=${process.env.LINE_TOKEN}`
-      );
-      return "";
-    }
     const request = new HTTPRequest();
+    const lineService = new LineService();
     try {
+      if (!process.env.LINE_TOKEN) {
+        console.error(
+          `LINE_TOKENが設定されていません LINE_TOKEN=${process.env.LINE_TOKEN}`
+        );
+        return "";
+      }
+
       let body = JSON.parse(requestBody);
-      await request.post(
-        "https://api.line.me/v2/bot/message/push",
-        {
-          to: body.events[0].source.userId,
-          messages: [{ type: "text", text: body.events[0].message.text }],
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.LINE_TOKEN}`,
-          },
-        }
+      lineService.setToken(process.env.LINE_TOKEN);
+      const sendMessageList = lineService.createMessageDTOList([
+        body.events[0].message.text,
+      ]);
+      await lineService.postMessage(
+        body.events[0].source.userId,
+        sendMessageList
       );
+
       return "OK";
     } catch (error) {
       console.error(`Err: ${error}`);
