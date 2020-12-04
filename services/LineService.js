@@ -16,7 +16,7 @@ module.exports = class LineService {
   /**
    *
    * @param {String} 宛先(ユーザID)
-   * @param {Array} 送信するメッセージの配列
+   * @param {Array} LineMsgDTOの配列
    */
   async postMessage(to, msg) {
     const httpRequest = new HTTPRequest();
@@ -35,6 +35,10 @@ module.exports = class LineService {
     );
   }
 
+  /**
+   *
+   * @param {Array} 送信するメッセージの配列
+   */
   createMessageDTOList(textArr = []) {
     const dtoArr = [];
     for (let text of textArr) {
