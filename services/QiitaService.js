@@ -1,5 +1,5 @@
-const QiitaDTO = require("../QiitaDTO");
-const RequestModule = require("../RequestModule");
+const QiitaDTO = require("../dto/QiitaDTO");
+const RequestModule = require("../modules/RequestModule");
 module.exports = class QiitaService {
   getTitle(data) {
     return data.title;

@@ -1,4 +1,4 @@
-const HTTPRequest = require("../HTTPRequest");
+const HTTPRequest = require("../modules/HTTPRequest");
 module.exports = class HelloController {
   static async main(requestBody) {
     if (!process.env.LINE_TOKEN) {
@@ -14,7 +14,7 @@ module.exports = class HelloController {
         "https://api.line.me/v2/bot/message/push",
         {
           to: body.events[0].source.userId,
-          messages: [{ type: "text", text: a.events[0].message.text }],
+          messages: [{ type: "text", text: body.events[0].message.text }],
         },
         {
           headers: {
@@ -25,6 +25,7 @@ module.exports = class HelloController {
       );
       return "OK";
     } catch (error) {
+      console.error(`Err: ${error}`);
       return `Err: ${error}`;
     }
   }
