@@ -1,0 +1,22 @@
+{
+  "name": "serverless-handson",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.local.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yoshi0202/serverless-handson.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yoshi0202/serverless-handson/issues"
+  },
+  "homepage": "https://github.com/yoshi0202/serverless-handson#readme",
+  "dependencies": {
+    "axios": "^0.21.0"
+  }
+}

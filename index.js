@@ -7,7 +7,7 @@ exports.handler = async (event) => {
       break;
 
     case "/hello":
-      return HelloController.main();
+      return await HelloController.main(event.body);
       break;
 
     default:
