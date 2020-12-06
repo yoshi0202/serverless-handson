@@ -1,12 +1,22 @@
-const QiitaService = require("../services/QiitaService");
+const ArticleController = require("./ArticleController");
+const DefaultController = require("./DefaultController");
 module.exports = class IndexController {
-  static async main() {
-    const qiitaService = new QiitaService();
+  static async main(requestBody) {
     try {
-      const res = await qiitaService.getNewArticles();
-      return qiitaService.createQiitaDTOList(res.data);
+      const receiveMsg = JSON.parse(requestBody).events[0].message.text;
+      console.log(/^.*(Qiita|qiita|キータ)/.test(receiveMsg));
+      switch (true) {
+        case /^.*(Qiita|qiita|キータ)/.test(receiveMsg):
+          return await ArticleController.main(requestBody);
+
+        default:
+          return await DefaultController.main(requestBody);
+      }
     } catch (error) {
-      return error;
+      return {
+        statusCode: "200",
+        body: error,
+      };
     }
   }
 };

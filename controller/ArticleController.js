@@ -6,12 +6,6 @@ module.exports = class ArticleController {
     const lineService = new LineService();
     const qiitaService = new QiitaService();
     try {
-      if (!process.env.LINE_TOKEN) {
-        console.error(
-          `LINE_TOKENが設定されていません LINE_TOKEN=${process.env.LINE_TOKEN}`
-        );
-        return "";
-      }
       const reqBody = JSON.parse(requestBody);
       const qiitaRes = await qiitaService.getNewArticles();
       const articleList = qiitaService.createQiitaDTOList(qiitaRes.data);
