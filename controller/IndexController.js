@@ -4,7 +4,6 @@ module.exports = class IndexController {
   static async main(requestBody) {
     try {
       const receiveMsg = JSON.parse(requestBody).events[0].message.text;
-      console.log(/^.*(Qiita|qiita|キータ)/.test(receiveMsg));
       switch (true) {
         case /^.*(Qiita|qiita|キータ)/.test(receiveMsg):
           return await ArticleController.main(requestBody);
