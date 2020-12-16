@@ -18,5 +18,8 @@
   "homepage": "https://github.com/yoshi0202/serverless-handson#readme",
   "dependencies": {
     "axios": "^0.21.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.1.3"
   }
 }
