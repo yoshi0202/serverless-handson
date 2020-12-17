@@ -1,8 +1,8 @@
-import { ExampleClass } from "./ExampleClass"
-const exampleClass = new ExampleClass()
-const msg: string = exampleClass.echo("hogehoeg");
+import IndexController from "./controller/IndexController"
+import HelloController from "./controller/HelloController"
+import RequestBodyImpl from "./interfaces/RequestBodyImpl"
 
-exports.handler = async (event:any) => {
+exports.handler = async (event: RequestBodyImpl) : Promise<string| {} > => {
   if (!process.env.LINE_TOKEN) {
     console.error(
       `LINE_TOKENが設定されていません LINE_TOKEN=${process.env.LINE_TOKEN}`
@@ -11,14 +11,12 @@ exports.handler = async (event:any) => {
   }
   switch (event.rawPath) {
     case "/":
-      // return await IndexController.main(event.body);
-      return "hoge"
+      return await IndexController.main(event.body);
 
     case "/hello":
-      // return await HelloController.main(event.body);
-      return "hoge"
+      return await HelloController.main(event.body);
 
     default:
-      break;
+      return "";
   }
 }
