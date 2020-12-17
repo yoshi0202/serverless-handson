@@ -7,8 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "npx tsc",
     "copy_package_json": "cp -pr package*.json dist/",
-    "copy_modules": "cp -pr node_modules dist/",
-    "remove_modules": "rm -rf dist/node_modules",
     "zip": "rm -rf api_v2_ts.zip && cd dist && npm install --only=prod && zip -r ../api_v2_ts.zip ./*",
     "package": "npm run tsc && npm run copy_package_json && npm run zip"
   },
