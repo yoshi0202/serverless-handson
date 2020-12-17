@@ -1,6 +1,10 @@
-const HTTPRequest = require("../modules/HTTPRequest");
-const LineMsgDTO = require("../dto/LineMsgDTO");
-module.exports = class LineService {
+import HTTPRequest from "../modules/HTTPRequest";
+import LineMsgDTO from "../dto/LineMsgDTO";
+import LineMsgDTOImpl from "../interfaces/LineMsgDTOImpl";
+
+export default class LineService {
+  token: string
+
   constructor() {
     this.token = "";
   }
@@ -9,7 +13,7 @@ module.exports = class LineService {
    *
    * @param {String} LINEのチャネルトークン
    */
-  setToken(token) {
+  setToken(token: string): void {
     this.token = token;
   }
 
@@ -18,7 +22,7 @@ module.exports = class LineService {
    * @param {String} 宛先(ユーザID)
    * @param {Array} LineMsgDTOの配列
    */
-  async postMessage(to, msg) {
+  async postMessage(to: string, msg: LineMsgDTO[]): Promise<void> {
     const httpRequest = new HTTPRequest();
     await httpRequest.post(
       "https://api.line.me/v2/bot/message/push",
@@ -39,12 +43,13 @@ module.exports = class LineService {
    *
    * @param {Array} 送信するメッセージの配列
    */
-  createMessageDTOList(textArr = []) {
+  createMessageDTOList(textArr:string[] = []): LineMsgDTOImpl[]{
     const dtoArr = [];
     for (let text of textArr) {
-      const lineMsgDTO = new LineMsgDTO();
-      lineMsgDTO.type = "text";
-      lineMsgDTO.text = text;
+      const lineMsgDTO = new LineMsgDTO(
+        "text",
+        text
+      );
       dtoArr.push(lineMsgDTO);
     }
     return dtoArr;
