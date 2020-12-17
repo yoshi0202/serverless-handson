@@ -1,3 +1,4 @@
 export default interface RequestBodyImpl {
-  [key: string]: any
+  rawPath: string,
+  body: string,
 }
