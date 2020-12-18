@@ -1,5 +1,6 @@
 import QiitaDTO from "../dto/QiitaDTO"
 import QiitaDTOImpl from "../interfaces/QiitaDTOImpl"
+import QiitaResponseImpl from "../interfaces/QiitaResponseImpl";
 
 import HTTPRequest from "../modules/HTTPRequest";
 export default class QiitaService {
@@ -15,15 +16,15 @@ export default class QiitaService {
     return new QiitaDTO(this.getTitle(apiRes), this.getUrl(apiRes));
   }
 
-  createQiitaDTOList(apiResArray: []): QiitaDTO[] {
-    return apiResArray.map((apiRes: QiitaDTOImpl) => {
+  createQiitaDTOList(apiResArray: QiitaResponseImpl): QiitaDTO[] {
+    return apiResArray.data.map((apiRes: QiitaDTOImpl) => {
       return this.createQiitaDTO(apiRes);
     });
   }
 
-  async getNewArticles(): Promise<{data: []}> {
+  async getNewArticles(): Promise<QiitaResponseImpl> {
     const httpRequest: HTTPRequest = new HTTPRequest();
-    return await httpRequest.get(
+    return <QiitaResponseImpl>await httpRequest.get(
       "https://qiita.com/api/v2/items?page=1&per_page=5"
     );
   }

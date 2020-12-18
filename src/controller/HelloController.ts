@@ -1,5 +1,6 @@
 import LineService from "../services/LineService";
 import LineRequestImpl from "../interfaces/LineRequestImpl"
+import LineMsgDTOImpl from "../interfaces/LineMsgDTOImpl";
 
 export default class HelloController {
   static async main(requestBody:string) : Promise<string | {}>{
@@ -7,7 +8,7 @@ export default class HelloController {
     try {
       const body:LineRequestImpl = JSON.parse(requestBody);
       lineService.setToken(<string>process.env.LINE_TOKEN);
-      const sendMessageList = lineService.createMessageDTOList([
+      const sendMessageList: LineMsgDTOImpl[] = lineService.createMessageDTOList([
         body.events[0].message.text,
       ]);
       await lineService.postMessage(

@@ -3,6 +3,7 @@ import LineService from "../services/LineService";
 import LineRequestImpl from "../interfaces/LineRequestImpl"
 import QiitaDTOImpl from "../interfaces/QiitaDTOImpl";
 import LineMsgDTOImpl from "../interfaces/LineMsgDTOImpl";
+import QiitaResponseImpl from "../interfaces/QiitaResponseImpl";
 
 export default class ArticleController {
   static async main(requestBody: string): Promise<string | {}> {
@@ -10,8 +11,8 @@ export default class ArticleController {
     const qiitaService:QiitaService = new QiitaService();
     try {
       const reqBody: LineRequestImpl = JSON.parse(requestBody);
-      const qiitaRes: {data: []} = await qiitaService.getNewArticles();
-      const articleList: QiitaDTOImpl[] = qiitaService.createQiitaDTOList(qiitaRes.data);
+      const qiitaRes: QiitaResponseImpl = await qiitaService.getNewArticles();
+      const articleList: QiitaDTOImpl[] = qiitaService.createQiitaDTOList(qiitaRes);
       const messageArr: string[] = qiitaService.createMsgArrayByQiitaDTO(articleList);
 
       lineService.setToken(<string>process.env.LINE_TOKEN);
