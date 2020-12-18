@@ -23,7 +23,7 @@ export default class LineService {
    * @param {Array} LineMsgDTOの配列
    */
   async postMessage(to: string, msg: LineMsgDTO[]): Promise<void> {
-    const httpRequest = new HTTPRequest();
+    const httpRequest: HTTPRequest = new HTTPRequest();
     await httpRequest.post(
       "https://api.line.me/v2/bot/message/push",
       {
@@ -46,7 +46,7 @@ export default class LineService {
   createMessageDTOList(textArr:string[] = []): LineMsgDTOImpl[]{
     const dtoArr = [];
     for (let text of textArr) {
-      const lineMsgDTO = new LineMsgDTO(
+      const lineMsgDTO:LineMsgDTOImpl = new LineMsgDTO(
         "text",
         text
       );
