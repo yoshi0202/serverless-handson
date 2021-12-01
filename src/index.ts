@@ -1,6 +1,7 @@
 import IndexController from "./controller/IndexController"
 import HelloController from "./controller/HelloController"
 import RequestBodyImpl from "./interfaces/RequestBodyImpl"
+import WikipediaController from "./controller/WikipediaController";
 
 exports.handler = async (event: RequestBodyImpl) : Promise<string| {} > => {
   if (!process.env.LINE_TOKEN) {
@@ -15,6 +16,9 @@ exports.handler = async (event: RequestBodyImpl) : Promise<string| {} > => {
 
     case "/hello":
       return await HelloController.main(event.body);
+
+    case "/wikipedia":
+      return await WikipediaController.main(event.body);
 
     default:
       return "";
